@@ -1,4 +1,5 @@
 import csv
+import matplotlib.pyplot as plt
 def generer_fichier():
     with open("ventes.csv", mode='w', newline='') as fichier:
         writer = csv.writer(fichier)
@@ -47,10 +48,25 @@ def ecrire_fichier(nom_fichier, ventes):
         writer.writeheader()
         for vente in ventes:
             writer.writerow(vente)
+def afficher_graphique(ventes):
+    ids = []
+    ca_nets = []
+
+    for vente in ventes:
+        ids.append(str(vente["ID"]))
+        ca_nets.append(vente["CA_Net"])
+
+    plt.figure()
+    plt.bar(ids, ca_nets)
+    plt.xlabel("ID Produit")
+    plt.ylabel("CA Net")
+    plt.title("Chiffre d'affaires par produit")
+    plt.show()
 def main() -> None:
     generer_fichier() 
     ventes = lire_fichier("ventes.csv")
     total, id_max = calculer_total(ventes)
+    afficher_graphique(ventes)
     ecrire_fichier("resultats_final.csv", ventes)
     print(f"Le total des ventes est: {total:.2f} euros")
     print(f"Produit le plus rentable (ID): {id_max}")
