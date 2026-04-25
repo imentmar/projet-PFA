@@ -72,3 +72,4 @@ def main() -> None:
     print(f"Produit le plus rentable (ID): {id_max}")
 if __name__ == "__main__":
     main()
+ 
