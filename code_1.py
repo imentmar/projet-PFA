@@ -1,4 +1,11 @@
 import csv
+def generer_fichier():
+    with open("ventes.csv", mode='w', newline='') as fichier:
+        writer = csv.writer(fichier)
+        writer.writerow(["ID", "Prix", "Quantite", "Remise"])
+        writer.writerow([101, 15.0, 3, 10])
+        writer.writerow([102, 25.0, 2, 5])
+        writer.writerow([103, 10.0, 5, 0])
 def lire_fichier(nom_fichier):
     ventes = []
     with open(nom_fichier, mode='r') as fichier:
@@ -41,6 +48,7 @@ def ecrire_fichier(nom_fichier, ventes):
         for vente in ventes:
             writer.writerow(vente)
 def main() -> None:
+    generer_fichier() 
     ventes = lire_fichier("ventes.csv")
     total, id_max = calculer_total(ventes)
     ecrire_fichier("resultats_final.csv", ventes)
